@@ -12,7 +12,7 @@ public class Menu extends JPanel {
 		btnCrear.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
 		btnCrear.setBounds(184, 105, 115, 23);
 		add(btnCrear);
-		btnCrear.addActionListener(-->);
+		//btnCrear.addActionListener(-->);
 		
 		JButton btnNewButton = new JButton("ELIMINAR");
 		btnNewButton.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
