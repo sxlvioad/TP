@@ -5,14 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class Menu extends JPanel {
-	public Menu(){
+	public Menu(JFrame marco){
 		setLayout(null);
 		
 		JButton btnCrear = new JButton("CREAR");
 		btnCrear.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
 		btnCrear.setBounds(184, 105, 115, 23);
 		add(btnCrear);
-		//btnCrear.addActionListener(-->);
+		btnCrear.addActionListener(event->{
+			marco.setContentPane(new Crear(marco));
+			marco.validate();
+		});
 		
 		JButton btnNewButton = new JButton("ELIMINAR");
 		btnNewButton.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
@@ -20,6 +23,11 @@ public class Menu extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		btnNewButton.addActionListener(event->{
+			marco.setContentPane(new Eliminar(marco));
+			marco.validate();
+		});
+
 		btnNewButton.setBounds(184, 139, 115, 23);
 		add(btnNewButton);
 		
@@ -27,11 +35,19 @@ public class Menu extends JPanel {
 		btnNewButton_1.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton_1.setBounds(184, 173, 115, 23);
 		add(btnNewButton_1);
+		btnNewButton_1.addActionListener(event->{
+			marco.setContentPane(new Modificar(marco));
+			marco.validate();
+		});
 		
 		JButton btnNewButton_2 = new JButton("CONSULTA");
 		btnNewButton_2.setFont(new Font("Verdana", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton_2.setBounds(184, 207, 115, 23);
 		add(btnNewButton_2);
+		btnNewButton_2.addActionListener(event->{
+			marco.setContentPane(new Consulta(marco));
+			marco.validate();
+		});
 		
 		JTextPane txtpnDsdsa = new JTextPane();
 		txtpnDsdsa.setEnabled(false);

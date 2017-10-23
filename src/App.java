@@ -5,36 +5,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class App extends JFrame {
+public class App {
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					App frame = new App();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public App() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(new Menu());
+		JFrame marco = new JFrame();
+		
+		marco.setVisible(true);
+		marco.setBounds(0, 0, 400, 400);
+		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		marco.setContentPane(new Menu(marco));
+		marco.validate();
 	}
 
 }
