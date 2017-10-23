@@ -11,7 +11,7 @@ public class App {
 		JFrame marco = new JFrame();
 		
 		marco.setVisible(true);
-		marco.setBounds(0, 0, 400, 400);
+		marco.setBounds(0, 0, 500, 400);
 		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		marco.setContentPane(new Menu(marco));
 		marco.validate();
