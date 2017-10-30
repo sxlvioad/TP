@@ -16,7 +16,7 @@ public class AcercaDe extends JPanel {
 		txtrVersion.setBackground(Color.LIGHT_GRAY);
 		txtrVersion.setForeground(Color.BLACK);
 		txtrVersion.setEditable(false);
-		txtrVersion.setText("Version:(4.5.2)\r\n\r\n(c) Copyright Consultora contributors and \r\n others 1999, 2017.\r\n\r\n All rights reserved.");
+		txtrVersion.setText("Version:(4.5.2)\r\n\r\n(c) Copyright Consultora contributors and \r\n others 1999, 2017.\r\n\r\n All rights reserved. JEJE");
 		txtrVersion.setBounds(108, 85, 342, 124);
 		add(txtrVersion);
 	}
