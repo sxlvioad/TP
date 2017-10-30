@@ -13,6 +13,7 @@ public class App {
 		JFrame marco = new JFrame();
 
 		marco.setVisible(true); // visible
+		marco.setResizable(false);
 		marco.setBounds(400, 175, 500, 400);
 		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

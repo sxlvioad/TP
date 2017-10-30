@@ -107,5 +107,9 @@ public class CrearSeguimiento extends JPanel {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(122, 211, 343, 111);
 		add(textArea);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(78, 49, 130, 22);
+		add(comboBox_1);
 	}
 }

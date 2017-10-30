@@ -15,9 +15,17 @@ public class Consulta extends JPanel {
 		lblConsulta.setBounds(200, 11, 98, 27);
 		add(lblConsulta);
 		
-	      table.setBounds(20, 94, 449, 233);
-	      add(table);
+		TableModel dataModel = new AbstractTableModel() {
+	          public int getColumnCount() { return 20; }
+	          public int getRowCount() { return 20;}
+	          public Object getValueAt(int row, int col) { return new Integer(row*col); }
+	      };
+	      
+		table = new JTable(dataModel);
+		table.setBounds(14, 85, 464, 238);
+		JScrollPane scrollbar = new JScrollPane(table);
+		scrollbar.setBounds(14, 85, 464, 238);
+		add(scrollbar);
 
-		
 	}
 }
