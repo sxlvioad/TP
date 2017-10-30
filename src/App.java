@@ -13,7 +13,6 @@ public class App {
 		JFrame marco = new JFrame();
 
 		marco.setVisible(true); // visible
-		marco.setResizable(false);
 		marco.setBounds(400, 175, 500, 400);
 		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -31,7 +30,8 @@ public class App {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // hola, cerrate xd
+				marco.setVisible(false); // hola, cerrate xd
+				System.exit(1);
 			}
 		});
 
@@ -137,6 +137,14 @@ public class App {
 		
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de");
 		mnAyuda.add(mntmAcercaDe);
+		mntmAcercaDe.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				marco.setContentPane(new AcercaDe(marco)); 
+				marco.validate();
+			}
+		});
 
 
 		Menu menu = new Menu(marco);
