@@ -1,14 +1,23 @@
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+
+import java.awt.Font;
 
 public class Consulta extends JPanel {
+	private JTable table;
 
 	public Consulta(JFrame marco) {
-		// TODO Apéndice de constructor generado automáticamente
 		setLayout(null);
 
-		JLabel lblConsulta = new JLabel("CONSULTA");
-		lblConsulta.setBounds(59, 23, 90, 14);
+		JLabel lblConsulta = new JLabel("Consultas");
+		lblConsulta.setFont(new Font("Calibri", Font.PLAIN, 22));
+		lblConsulta.setBounds(200, 11, 98, 27);
 		add(lblConsulta);
-	}
+		
+	      table.setBounds(20, 94, 449, 233);
+	      add(table);
 
+		
+	}
 }
