@@ -1,45 +1,54 @@
 import javax.swing.*;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@SuppressWarnings("serial")
 
-public class App {
+public class App extends JFrame {
 
 	public static void main(String[] args) {
 
-		// JFrame
-
 		JFrame marco = new JFrame();
+		marco.setFont(new Font("Calibri", Font.PLAIN, 13));
 
-		marco.setVisible(true); // visible
-		marco.setBounds(400, 175, 500, 400);
+		marco.setTitle("Consultora");
+		ImageIcon img = (new ImageIcon(marco.getClass().getResource("/home.png")));
+		marco.setIconImage(img.getImage());
+		marco.setVisible(true);
+		marco.setSize(750, 550);
+		marco.setResizable(false);
+		marco.setLocationRelativeTo(null);
 		marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Menu
 		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(null);
+		menuBar.setBackground(new Color(85, 205, 115));
+
+		Font f = (new Font("Calibri", Font.PLAIN, 14));
+		// Color c = (new Color(85, 205, 115));
+		UIManager.put("Menu.font", f);
+		UIManager.put("MenuItem.font", f);
+
 		marco.setJMenuBar(menuBar);
-		
+
 		// Menu > Archivo
 		JMenu mnArchivo = new JMenu("Archivo");
 		menuBar.add(mnArchivo);
-		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
-		mnArchivo.add(mntmSalir);
-		mntmSalir.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				marco.setVisible(false); // hola, cerrate xd
-				System.exit(1);
-			}
-		});
-
-		// Menu > Nuevo
+		// > Nuevo
 		JMenu mnNuevo = new JMenu("Nuevo");
-		menuBar.add(mnNuevo);
+		mnNuevo.setPreferredSize(new Dimension(100, mnNuevo.getPreferredSize().height));
+		mnArchivo.add(mnNuevo);
 
+		// >> Tema
 		JMenuItem mntmTema = new JMenuItem("Tema");
+		mnNuevo.add(mntmTema);
+
 		mnNuevo.add(mntmTema);
 		mntmTema.addActionListener(new ActionListener() {
 
@@ -50,77 +59,82 @@ public class App {
 			}
 		});
 
+		// >> Seguimiento
 		JMenuItem mntmSeguimiento = new JMenuItem("Seguimiento");
 		mnNuevo.add(mntmSeguimiento);
 
-		
-		 mntmSeguimiento.addActionListener(new ActionListener(){
-		 
-		 @Override public void actionPerformed(ActionEvent arg0) {
-		 marco.setContentPane(new CrearSeguimiento(marco)); // cambiar
-		 marco.validate(); } });
-		 
-		
-		// Menu > Modificar
-		JMenu mnModificar = new JMenu("Modificar");
-		menuBar.add(mnModificar);
+		mntmSeguimiento.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				marco.setContentPane(new CrearSeguimiento(marco));
+				marco.validate();
+			}
+		});
+
+		// Separador
+		JSeparator separator = new JSeparator();
+		mnArchivo.add(separator);
+
+		// Salir
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mnArchivo.add(mntmSalir);
+		mntmSalir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				marco.setVisible(false);
+				System.exit(1);
+			}
+		});
+
+		////////////////////////////////////////////////////////////////////
+
+		// Menu > Editar
+		JMenu mnEditar = new JMenu("Editar");
+		menuBar.add(mnEditar);
 
 		// Tema
 		JMenuItem mntmTema_1 = new JMenuItem("Tema");
-		mnModificar.add(mntmTema_1);
+		mntmTema_1.setPreferredSize(new Dimension(100, mntmTema_1.getPreferredSize().height));
+		mnEditar.add(mntmTema_1);
 		mntmTema_1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new Modificar(marco)); 
+				marco.setContentPane(new Modificar(marco));
 				marco.validate();
 			}
 		});
-		
-		//Seguimiento
-		JMenuItem mntmSeguimiento_1 = new JMenuItem("Seguimiento");
-		mnModificar.add(mntmSeguimiento_1);
-		
-		 mntmSeguimiento_1.addActionListener(new ActionListener(){
-		 
-		 @Override public void actionPerformed(ActionEvent arg0) {
-		 marco.setContentPane(new ModificarSeguimiento(marco)); 
-		 marco.validate(); } });
-		 
 
-		// Menu > Eliminar
-		JMenu mnEliminar = new JMenu("Eliminar");
-		menuBar.add(mnEliminar);
-		
-		JMenuItem mntmTema_3 = new JMenuItem("Tema");
-		mnEliminar.add(mntmTema_3);
-		mntmTema_3.addActionListener(new ActionListener() {
+		// Seguimiento
+		JMenuItem mntmSeguimiento_1 = new JMenuItem("Seguimiento");
+		mnEditar.add(mntmSeguimiento_1);
+
+		JSeparator separator_1 = new JSeparator();
+		mnEditar.add(separator_1);
+
+		JMenuItem mntmEliminar = new JMenuItem("Eliminar");
+		mnEditar.add(mntmEliminar);
+
+		mntmSeguimiento_1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new Eliminar(marco)); // CrearTema
-				marco.validate();
+				// marco.setContentPane(new ModificarSeguimiento(marco));
+				// marco.validate();
 			}
 		});
-		
-		// Menu Listener
-		/*
-		 * mnEliminar.addMenuListener(new MenuListener(){
-		 * 
-		 * @Override public void menuSelected(MenuEvent e) {
-		 * marco.setContentPane(new Eliminar(marco)); marco.validate(); }
-		 * 
-		 * @Override public void menuCanceled(MenuEvent e) {}
-		 * 
-		 * @Override public void menuDeselected(MenuEvent e) {} });
-		 */
-		
-		//Menu > Consulta
-		JMenu mnConsulta = new JMenu("Consultar");
+
+		////////////////////////////////////////////////////////////////////
+
+		// Menu > Consulta
+		JMenu mnConsulta = new JMenu("Consultas");
 		menuBar.add(mnConsulta);
 
-		//Tema
+		// Tema
 		JMenuItem mntmTema_2 = new JMenuItem("Tema");
+		mntmTema_2.setPreferredSize(new Dimension(100, mntmTema_2.getPreferredSize().height));
 		mnConsulta.add(mntmTema_2);
 		mntmTema_2.addActionListener(new ActionListener() {
 
@@ -130,25 +144,32 @@ public class App {
 				marco.validate();
 			}
 		});
-		
-		//Menu > Ayuda
+
+		////////////////////////////////////////////////////////////////////
+
+		// Menu > Ayuda
 		JMenu mnAyuda = new JMenu("Ayuda");
 		menuBar.add(mnAyuda);
-		
+
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de");
+		mntmAcercaDe.setPreferredSize(new Dimension(100, mntmAcercaDe.getPreferredSize().height));
 		mnAyuda.add(mntmAcercaDe);
 		mntmAcercaDe.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				marco.setContentPane(new AcercaDe(marco)); 
-				marco.validate();
+				final JFrame popUp = new JFrame();
+				popUp.setContentPane(new AcercaDe(popUp));
+
+				JOptionPane.showMessageDialog(popUp,
+						"Version: (4.5.2) \n(c) Copyright Consultora contributors and others 1999, 2017. \nAll rights reserved.",
+						"Acerca de", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 
-
-		Menu menu = new Menu(marco);
-		marco.setContentPane(menu);
+		marco.setContentPane(new Consulta(marco));
 		marco.validate();
 	}
+
+
 }

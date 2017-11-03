@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
+
 public class Menu extends JPanel {
 	public Menu(JFrame marco){
 		setLayout(null);
@@ -24,8 +26,7 @@ public class Menu extends JPanel {
 			}
 		});
 		btnNewButton.addActionListener(event->{
-			marco.setContentPane(new Eliminar(marco));
-			marco.validate();
+
 		});
 
 		btnNewButton.setBounds(184, 139, 115, 23);
