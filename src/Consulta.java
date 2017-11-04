@@ -70,12 +70,7 @@ public class Consulta extends JSplitPane {
 		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		table.setBounds(184, 17, 537, 382);
 		panel.add(table);
-		
-		/*
-		table = new JTable();
-		table.setBounds(184, 17, 537, 382);
-		panel.add(table);
-		*/
+	
 
 		JLabel lblFiltrar = new JLabel("Filtrar");
 		lblFiltrar.setFont(new Font("Tahoma", Font.PLAIN, 13));

@@ -1,11 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 
@@ -131,8 +127,13 @@ public class CrearSeguimiento extends JPanel {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
+			
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(),(String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
+			usuarioDAO.agregarSeguimiento(seguimiento);
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
+			
 		});
 		panel.add(btnAceptar);
 

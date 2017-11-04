@@ -4,6 +4,8 @@ import com.toedter.calendar.JDateChooser;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.time.LocalDate;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 
@@ -50,10 +52,10 @@ public class Crear extends JPanel {
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblCodigo);
 
-		JLabel lblSetCodigo = new JLabel("ABC654");
-		lblSetCodigo.setBounds(621, 25, 64, 20);
+		JTextField codigotxtF = new JTextField("ABC654");
+		codigotxtF.setBounds(621, 25, 64, 20);
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
-		panel.add(lblSetCodigo);
+		panel.add(codigotxtF);
 
 		JLabel lblSeguimiento = new JLabel("Seguimiento");
 		lblSeguimiento.setBounds(39, 61, 127, 20);
@@ -99,6 +101,9 @@ public class Crear extends JPanel {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Tema tema = new Tema(codigotxtF.getText(), palabraClavetxtFld.getText(), inicio, fin, descripciontxtArea.getText()); //local date inicio y fin
+			usuarioDAO.agregarTema(tema);
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
 		});
