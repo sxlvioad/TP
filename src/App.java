@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 
 public class App extends JFrame {
+	public App() {
+	}
 
 	public static void main(String[] args) {
 
@@ -27,7 +29,7 @@ public class App extends JFrame {
 		// Menu
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(null);
-		menuBar.setBackground(new Color(85, 205, 115));
+		menuBar.setBackground(new Color(69, 193, 100));
 
 		Font f = (new Font("Calibri", Font.PLAIN, 14));
 		// Color c = (new Color(85, 205, 115));

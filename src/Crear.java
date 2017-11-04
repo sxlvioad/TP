@@ -8,7 +8,8 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 
 public class Crear extends JPanel {
-	private JTextField textField;
+	
+	private JTextField palabraClavetxtFld;
 
 	public Crear(JFrame marco) {
 
@@ -20,34 +21,29 @@ public class Crear extends JPanel {
 		barra.setLocation(0, 0);
 		barra.setSize(749, 85);
 		barra.setLayout(null);
-		barra.setBackground(new Color(85, 205, 115));
+		barra.setBackground(new Color(69, 193, 100));
 		add(barra);
 
 		setLayout(null);
-
-		JLabel lblCrear = new JLabel("Nuevo Tema");
-		lblCrear.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCrear.setBounds(301, 42, 166, 21);
-		lblCrear.setFont(new Font("Calibri", Font.PLAIN, 22));
-		barra.add(lblCrear);
 
 		// Panel
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 83, 750, 428);
+		panel.setBackground(new Color(246, 246, 246));
 		add(panel);
 
 		panel.setLayout(null);
 
-		JLabel lblPlabaraClave = new JLabel("Plabara Clave");
-		lblPlabaraClave.setBounds(39, 25, 104, 20);
-		lblPlabaraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
-		panel.add(lblPlabaraClave);
+		JLabel lblPalabraClave = new JLabel("Palabra Clave");
+		lblPalabraClave.setBounds(39, 25, 104, 20);
+		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
+		panel.add(lblPalabraClave);
 
-		textField = new JTextField();
-		textField.setBounds(142, 26, 399, 20);
-		textField.setColumns(10);
-		panel.add(textField);
+		palabraClavetxtFld = new JTextField();
+		palabraClavetxtFld.setBounds(153, 26, 388, 20);
+		palabraClavetxtFld.setColumns(10);
+		panel.add(palabraClavetxtFld);
 
 		JLabel lblCodigo = new JLabel("Codigo");
 		lblCodigo.setBounds(563, 25, 64, 20);
@@ -83,27 +79,29 @@ public class Crear extends JPanel {
 		panel.add(fechaFin);
 
 		JLabel lblDescipcin = new JLabel("Descipci\u00F3n");
-		lblDescipcin.setBounds(42, 140, 104, 20);
+		lblDescipcin.setBounds(38, 136, 104, 20);
 		lblDescipcin.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblDescipcin);
 
-		JTextArea textArea = new JTextArea();
-		JScrollPane scrollpane = new JScrollPane(textArea);
+		JTextArea descripciontxtArea = new JTextArea();
+		JScrollPane scrollpane = new JScrollPane(descripciontxtArea);
 		scrollpane.setBounds(158, 138, 553, 206);
 		panel.add(scrollpane);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(617, 355, 94, 23);
-		panel.add(btnCancelar);
-
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(513, 355, 94, 23);
-		panel.add(btnAceptar);
-
 		btnCancelar.addActionListener(event -> {
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
 		});
+		panel.add(btnCancelar);
 
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(513, 355, 94, 23);
+		btnAceptar.addActionListener(event -> {
+			marco.setContentPane(new Consulta(marco));
+			marco.validate();
+		});
+		panel.add(btnAceptar);
 	}
 }

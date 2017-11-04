@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 
-public class Consulta extends JPanel {
+public class Consulta extends JSplitPane {
 
 	private JTextField textField;
 	private JTable table;
@@ -22,16 +22,16 @@ public class Consulta extends JPanel {
 
 		JPanel barra = new JPanel();
 		barra.setLocation(0, 0);
-		barra.setSize(767, 85);
+		barra.setSize(764, 85);
 		barra.setLayout(null);
-		barra.setBackground(new Color(85, 205, 115));
+		barra.setBackground(new Color(69, 193, 100));
 		add(barra);
 
 		textField = new JTextField();
 		textField.setBounds(181, 28, 507, 29);
 		textField.setColumns(10);
 		textField.setBorder(null);
-		textField.setBackground(new Color(77, 186, 106));
+		textField.setBackground(new Color(65, 182, 94));
 		textField.setFont(new Font("Calibri", Font.PLAIN, 14));
 		TextPrompt placeholder = new TextPrompt(" Buscar", textField);
 		placeholder.changeAlpha(0.75f);
@@ -42,7 +42,7 @@ public class Consulta extends JPanel {
 		imagebutton.setIcon(new ImageIcon(this.getClass().getResource("/searcher1.png")));
 		imagebutton.setBounds(687, 28, 31, 29);
 		imagebutton.setBorder(new EmptyBorder(0, 0, 0, 0));
-		imagebutton.setBackground(new Color(77, 186, 106));
+		imagebutton.setBackground(new Color(65, 182, 94));
 		barra.add(imagebutton);
 
 		JLabel lblConsultas = new JLabel("Consultas");
@@ -54,10 +54,11 @@ public class Consulta extends JPanel {
 		// JTable
 
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 85, 767, 421);
+		panel.setBounds(0, 85, 764, 421);
+		panel.setBackground(new Color(246, 246, 246));
+		panel.setLayout(null);
 		add(panel);
 
-		panel.setLayout(null);
 		
 		Object[][] data = { { "ABC123", "Libro", "12", "24" }, { "DEF456", "Cosas", "22", "24" }, { "GHI789", "Politica", "05", "17" }, 
 				};
