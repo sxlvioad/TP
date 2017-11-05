@@ -1,27 +1,49 @@
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 
 public class UsuarioDAO {
 
 	private Connection conn = null;
+	private String url = "jdbc:mysql://127.0.0.1:3306/consultora";
+	
+	public void listarTemas(Tema tema){
+			 try {
 
+		            conn = (Connection) DriverManager.getConnection(url,"root","");
+		            Statement stmt = (Statement) conn.createStatement();
+		            ResultSet rs;
+		 
+		            rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin FROM Customers");
+		            while ( rs.next() ) {
+		                tema.setCodigo(rs.getString("cod_tema"));
+		                tema.setPalabraClave(rs.getString("palabra_clave"));
+		                tema.setInicio(rs.getDate("fecha_inicio"));
+		                tema.setFin(rs.getDate("fecha_fin"));
+
+		            }
+		            conn.close();
+		        } catch (Exception e) {
+		            System.err.println("Got an exception! ");
+		            System.err.println(e.getMessage());
+		        }
+
+	}
+
+	
 	public void agregarTema(Tema tema) {
 		
 	    try
 	    {
-	      // create a mysql database connection
-	      String url = "jdbc:mysql://127.0.0.1:3306/consultora";
-	
 	      conn = (Connection) DriverManager.getConnection(url, "root", "");
 	
-	      // the mysql insert statement
 	      String query = " insert into seguimiento (cod_tema, palabra_clave, descripcion, fecha_inicio, fecha_fin)"
 	        + " values (?, ?, ?, ?, ?)";
 	
-	      // create the mysql insert preparedstatement
 	      PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	      preparedStmt.setString (1, tema.getCodigo());
 	      preparedStmt.setString (2, tema.getPalabraClave());
@@ -29,7 +51,6 @@ public class UsuarioDAO {
 	      //preparedStmt.setDate   (4, tema.getInicio());
 	      //preparedStmt.setDate	 (5, tema.getFin());
 	      
-	      // execute the preparedstatement
 	      preparedStmt.execute();
 	      
 	      conn.close();
@@ -45,16 +66,12 @@ public class UsuarioDAO {
 
 	    try
 	    {
-	      // create a mysql database connection
-	      String url = "jdbc:mysql://127.0.0.1:3306/consultora";
 	
 	      conn = (Connection) DriverManager.getConnection(url, "root", "");
 	
-	      // the mysql insert statement
 	      String query = " insert into seguimiento (cod_tema, id_operador, mintv, mincentral, cant_notas, cant_tapas, apreciacion)"
 	        + " values (?, ?, ?, ?, ?, ?, ?)";
 	
-	      // create the mysql insert preparedstatement
 	      PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	      preparedStmt.setString (1, seguimiento.getCodigo());
 	      preparedStmt.setString (2, seguimiento.getOperador());
@@ -64,7 +81,6 @@ public class UsuarioDAO {
 	      preparedStmt.setInt    (6, seguimiento.getCantTapasRevistas());
 	      preparedStmt.setString (7, seguimiento.getApreciacion());
 	
-	      // execute the preparedstatement
 	      preparedStmt.execute();
 	      
 	      conn.close();

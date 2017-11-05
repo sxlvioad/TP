@@ -101,9 +101,11 @@ public class Crear extends JPanel {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
+			/*
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			Tema tema = new Tema(codigotxtF.getText(), palabraClavetxtFld.getText(), inicio, fin, descripciontxtArea.getText()); //local date inicio y fin
 			usuarioDAO.agregarTema(tema);
+			*/
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
 		});

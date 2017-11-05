@@ -60,9 +60,16 @@ public class Consulta extends JSplitPane {
 		add(panel);
 
 		
+		
 		Object[][] data = { { "ABC123", "Libro", "12", "24" }, { "DEF456", "Cosas", "22", "24" }, { "GHI789", "Politica", "05", "17" }, 
 				};
 
+		/*
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		Tema tema = new Tema(tema.getCodigo(), tema.getPalabraClave(), tema.getInicio(), tema.getFin(), tema.getDescripcion());
+		usuarioDAO.listarTemas(tema);
+		*/
+		
 		String[] columnNames = { "Codigo Tema", "Palabra Clave", "Inicio", "Fin" };
 		final DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
