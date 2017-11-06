@@ -62,7 +62,7 @@ public class Consulta extends JSplitPane {
 
 		
 		
-		Object[][] data = { { "ABC123", "Libro", "12", "24" }, { "DEF456", "Cosas", "22", "24" }, { "GHI789", "Politica", "05", "17" }, 
+		Object[][] data = {{ "ABC123", "Libro", "12", "24" }, { "DEF456", "Cosas", "22", "24" }, { "GHI789", "Politica", "05", "17" }, 
 				};
 
 		

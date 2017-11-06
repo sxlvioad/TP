@@ -10,8 +10,6 @@ import java.awt.Font;
 
 public class Crear extends JPanel {
 	
-	private JTextField palabraClavetxtFld;
-
 	public Crear(JFrame marco) {
 
 		setLayout(null);
@@ -41,7 +39,7 @@ public class Crear extends JPanel {
 		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblPalabraClave);
 
-		palabraClavetxtFld = new JTextField();
+		JTextField palabraClavetxtFld = new JTextField();
 		palabraClavetxtFld.setBounds(153, 26, 388, 20);
 		palabraClavetxtFld.setColumns(10);
 		panel.add(palabraClavetxtFld);
@@ -51,7 +49,7 @@ public class Crear extends JPanel {
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblCodigo);
 
-		JTextField codigotxtF = new JTextField("ABC654");
+		JTextField codigotxtF = new JTextField("");
 		codigotxtF.setBounds(621, 25, 64, 20);
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(codigotxtF);
@@ -101,9 +99,9 @@ public class Crear extends JPanel {
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
 
-			//UsuarioDAO usuarioDAO = new UsuarioDAO();
-			//Tema tema = new Tema(codigotxtF.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText()); //local date inicio y fin
-			//usuarioDAO.agregarTema(tema);
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Tema tema = new Tema(codigotxtF.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
+			usuarioDAO.agregarTema(tema);
 			
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
