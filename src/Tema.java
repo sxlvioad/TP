@@ -1,4 +1,7 @@
-import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 public class Tema {
@@ -12,8 +15,8 @@ public class Tema {
 	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion) {
 		this.codigo = codigo;
 		this.palabraClave = palabraClave;
-		this.inicio =  inicio;
-		this.fin =  fin;
+		this.setInicio(inicio);
+		this.setFin(fin);
 		this.descripcion = descripcion;
 	}
 
@@ -38,7 +41,9 @@ public class Tema {
 	}
 
 	public void setInicio(Date inicio) {
-		this.inicio = inicio;
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		Instant instant = inicio.toInstant();
+		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
 	}
 
 	public Date getFin() {
@@ -46,7 +51,9 @@ public class Tema {
 	}
 
 	public void setFin(Date fin) {
-		this.fin = fin;
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		Instant instant = fin.toInstant();
+		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
 	}
 
 	public String getDescripcion() {

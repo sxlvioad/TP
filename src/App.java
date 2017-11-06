@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 
 public class App extends JFrame {
+	
 	public App() {
 	}
 
@@ -16,7 +17,6 @@ public class App extends JFrame {
 
 		JFrame marco = new JFrame();
 		marco.setFont(new Font("Calibri", Font.PLAIN, 13));
-
 		marco.setTitle("Consultora");
 		ImageIcon img = (new ImageIcon(marco.getClass().getResource("/home.png")));
 		marco.setIconImage(img.getImage());
@@ -69,7 +69,7 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new CrearSeguimiento(marco));
+				marco.setContentPane(new CrearSeguimiento(marco));//Crear Seguimiento
 				marco.validate();
 			}
 		});
