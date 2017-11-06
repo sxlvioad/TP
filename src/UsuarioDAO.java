@@ -1,6 +1,8 @@
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.time.LocalDate;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -11,30 +13,27 @@ public class UsuarioDAO {
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora";
 	
-	public void listarTemas(Tema tema){
-			 try {
+	public ArrayList<Tema> listarTemas(){
+			
+			ArrayList<Tema> listarTema = new ArrayList<>();
+			try {
 
-		            conn = (Connection) DriverManager.getConnection(url,"root","");
+					conn = (Connection) DriverManager.getConnection(url,"root","");
 		            Statement stmt = (Statement) conn.createStatement();
-		            ResultSet rs;
-		 
-		            rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin FROM Customers");
+		            ResultSet rs;	 
+		            rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin FROM Tema");
 		            while ( rs.next() ) {
-		                tema.setCodigo(rs.getString("cod_tema"));
-		                tema.setPalabraClave(rs.getString("palabra_clave"));
-		                tema.setInicio(rs.getDate("fecha_inicio"));
-		                tema.setFin(rs.getDate("fecha_fin"));
-
+		                Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"), rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
+		                listarTema.add(tema);
 		            }
 		            conn.close();
 		        } catch (Exception e) {
-		            System.err.println("Got an exception! ");
-		            System.err.println(e.getMessage());
+		            JOptionPane.showMessageDialog(null, e);
 		        }
+			return listarTema;
 
 	}
 
-	
 	public void agregarTema(Tema tema) {
 		
 	    try
@@ -48,8 +47,8 @@ public class UsuarioDAO {
 	      preparedStmt.setString (1, tema.getCodigo());
 	      preparedStmt.setString (2, tema.getPalabraClave());
 	      preparedStmt.setString (3, tema.getDescripcion());
-	      //preparedStmt.setDate   (4, tema.getInicio());
-	      //preparedStmt.setDate	 (5, tema.getFin());
+	      preparedStmt.setDate   (4, tema.getInicio());
+	      preparedStmt.setDate	 (5, tema.getFin());
 	      
 	      preparedStmt.execute();
 	      
@@ -57,8 +56,7 @@ public class UsuarioDAO {
 	    }
 	    catch (Exception e)
 	    {
-	      System.err.println("Got an exception!");
-	      System.err.println(e.getMessage());
+	    	JOptionPane.showMessageDialog(null, e);
 	    }
 	}
 
@@ -66,7 +64,6 @@ public class UsuarioDAO {
 
 	    try
 	    {
-	
 	      conn = (Connection) DriverManager.getConnection(url, "root", "");
 	
 	      String query = " insert into seguimiento (cod_tema, id_operador, mintv, mincentral, cant_notas, cant_tapas, apreciacion)"
@@ -87,10 +84,29 @@ public class UsuarioDAO {
 	    }
 	    catch (Exception e)
 	    {
-	      System.err.println("Got an exception!");
-	      System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e);
 	    }
   }
+	
+	public void eliminarTema(Tema tema){
+		 try
+		    {
+		      conn = (Connection) DriverManager.getConnection(url, "root", "");
+		
+		      String query = "DELETE FROM tema where id_tema = ?";
+		      PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
+		      preparedStmt.setInt(1, 3); // como hago para seleccionar el id_tema desde mi JTable ¿¿¿¿
+
+		      preparedStmt.execute();
+		      
+		      conn.close();
+
+		    }
+		    catch (Exception e)
+		    {
+	            JOptionPane.showMessageDialog(null, e);
+		    }
+	}
 }
 
 

@@ -34,7 +34,7 @@ public class CrearSeguimiento extends JPanel {
 		lblTema.setBounds(46, 56, 46, 14);
 		barra.add(lblTema);
 		
-		JComboBox temacmbBox = new JComboBox();
+		JComboBox<String> temacmbBox = new JComboBox<String>();
 		temacmbBox.setBounds(102, 53, 319, 20);
 		barra.add(temacmbBox);
 		
@@ -43,7 +43,7 @@ public class CrearSeguimiento extends JPanel {
 		lblOperador.setBounds(465, 53, 66, 21);
 		barra.add(lblOperador);
 		
-		JComboBox operadorcmbBox = new JComboBox();
+		JComboBox<String> operadorcmbBox = new JComboBox<String>();
 		operadorcmbBox.setBounds(541, 53, 160, 20);
 		barra.add(operadorcmbBox);
 

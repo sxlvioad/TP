@@ -1,19 +1,19 @@
 import java.sql.Date;
-import java.time.LocalDate;
+
 
 public class Tema {
 
 	private String codigo;
 	private String palabraClave;
-	private LocalDate inicio;
-	private LocalDate fin;
+	private Date inicio;
+	private Date fin;
 	private String descripcion;
 
-	public Tema(String codigo, String palabraClave, LocalDate inicio, LocalDate fin, String descripcion) {
+	public Tema(String codigo, String palabraClave, Date inicio, Date fin, String descripcion) {
 		this.codigo = codigo;
 		this.palabraClave = palabraClave;
-		this.inicio = inicio;
-		this.fin = fin;
+		this.inicio =  inicio;
+		this.fin =  fin;
 		this.descripcion = descripcion;
 	}
 
@@ -33,19 +33,19 @@ public class Tema {
 		this.palabraClave = palabraClave;
 	}
 
-	public LocalDate getInicio() {
+	public Date getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalDate inicio) {
+	public void setInicio(Date inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalDate getFin() {
+	public Date getFin() {
 		return fin;
 	}
 
-	public void setFin(LocalDate fin) {
+	public void setFin(Date fin) {
 		this.fin = fin;
 	}
 
@@ -56,4 +56,5 @@ public class Tema {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 }

@@ -1,5 +1,6 @@
 
 public class Operador {
+	@SuppressWarnings("unused")
 	private String nombre;
 
 	public Operador(String nombre) {
