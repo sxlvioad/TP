@@ -26,3 +26,12 @@ create table operador (
 id_operador int not null auto_increment primary key,
 nombre_operador varchar (20)
 );
+
+create table redes_sociales (
+red_social varchar (20) primary key,
+pub_apoyo int,
+pub_rechazo int,
+pub_neutral int,
+replicas int,
+mg int
+);
