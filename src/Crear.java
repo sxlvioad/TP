@@ -12,8 +12,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 
 public class Crear extends JPanel {
-	
-<<<<<<< HEAD
+
 	private JTextField palabraClavetxtFld;
 	private JTextField codigotxtFld;
 	private JDateChooser fechaInicio;
@@ -23,10 +22,7 @@ public class Crear extends JPanel {
 	private JButton btnAceptar;
 	
 	private TemaDAO temaDAO = new TemaDAO();
-	
-	
-=======
->>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
+		
 	public Crear(JFrame marco) {
 
 		setLayout(null);
@@ -56,7 +52,7 @@ public class Crear extends JPanel {
 		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblPalabraClave);
 
-		JTextField palabraClavetxtFld = new JTextField();
+		palabraClavetxtFld = new JTextField();
 		palabraClavetxtFld.setBounds(153, 26, 388, 20);
 		palabraClavetxtFld.setColumns(10);
 		panel.add(palabraClavetxtFld);
@@ -66,13 +62,10 @@ public class Crear extends JPanel {
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblCodigo);
 
-<<<<<<< HEAD
+
 		codigotxtFld = new JTextField("");
 		codigotxtFld.setBounds(621, 25, 64, 20);
-=======
-		JTextField codigotxtF = new JTextField("");
-		codigotxtF.setBounds(621, 25, 64, 20);
->>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
+
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(codigotxtFld);
 
@@ -120,17 +113,10 @@ public class Crear extends JPanel {
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
-<<<<<<< HEAD
 			
 			Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
 			temaDAO.agregarTema(tema);
-=======
-
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			Tema tema = new Tema(codigotxtF.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
-			usuarioDAO.agregarTema(tema);
->>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
-			
+		
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
 		});

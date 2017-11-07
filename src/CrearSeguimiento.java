@@ -10,15 +10,10 @@ public class CrearSeguimiento extends JPanel {
 	private JTextField hscentraltxtField;
 	private JTextField notasDiariostxtField;
 	private JTextField tapasRevistatxtField;
-<<<<<<< HEAD
 	private TemaDAO temaDAO = new TemaDAO();
 	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
 	private OperadorDAO operadorDAO = new OperadorDAO();
-	
-=======
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
->>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
 	public CrearSeguimiento(JFrame marco){
 		
 		setLayout(null);
@@ -43,11 +38,8 @@ public class CrearSeguimiento extends JPanel {
 		barra.add(lblTema);
 		
 		JComboBox<String> temacmbBox = new JComboBox<String>();
-<<<<<<< HEAD
-		for (String tema : temaDAO.showTemas()) {
-=======
-		for (String tema : usuarioDAO.listarTemas()) {
->>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
+		for (String tema: temaDAO.showTemas()) {
+
 			temacmbBox.addItem(tema);
 		}
 		temacmbBox.setBounds(102, 53, 319, 20);
@@ -59,13 +51,10 @@ public class CrearSeguimiento extends JPanel {
 		barra.add(lblOperador);
 		
 		JComboBox<String> operadorcmbBox = new JComboBox<String>();
-		//usuarioDAO.listarOperadores();
-<<<<<<< HEAD
 		for (String operadores : operadorDAO.listarOperadores()) {
-=======
-		for (String operadores : usuarioDAO.listarOperadores()) {
->>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
+			
 			operadorcmbBox.addItem(operadores);
+			
 		}
 		operadorcmbBox.setBounds(541, 53, 160, 20);
 		barra.add(operadorcmbBox);
