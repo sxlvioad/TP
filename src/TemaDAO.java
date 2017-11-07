@@ -8,17 +8,31 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
+import com.mysql.jdbc.StatementImpl;
 
 public class TemaDAO {
 
 	private Connection conn = null;
 	private String url = "jdbc:mysql://127.0.0.1:3306/consultora?autoReconnect=true&useSSL=false";
+	private Statement stmt = null;
+
+	public TemaDAO() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
+			stmt = (Statement) conn.createStatement();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * nuevo tema
+	 */
 	
 	public void agregarTema(Tema tema) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
 
 			String query = " insert into tema (cod_tema, palabra_clave, descripcion, fecha_inicio, fecha_fin)"
 					+ " values (?, ?, ?, ?, ?)";
@@ -32,26 +46,21 @@ public class TemaDAO {
 
 			preparedStmt.execute();
 
-			
 			conn.close();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
-	}	
-	
+	}
+
 	/*
 	 * Consulta Temas
 	 */
-	
+
 	public ArrayList<Tema> displayTemas() {
 
 		ArrayList<Tema> listarTema = new ArrayList<>();
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-
-			Statement stmt = (Statement) conn.createStatement();
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM Tema");
 			while (rs.next()) {
@@ -61,7 +70,7 @@ public class TemaDAO {
 			}
 			conn.close();
 
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 
 			JOptionPane.showMessageDialog(null, e);
 
@@ -78,10 +87,6 @@ public class TemaDAO {
 		ArrayList<String> listarTema = new ArrayList<>();
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-
-			Statement stmt = (Statement) conn.createStatement();
 			ResultSet rs;
 			rs = stmt.executeQuery("SELECT cod_tema from tema");
 			while (rs.next()) {
@@ -90,7 +95,7 @@ public class TemaDAO {
 			}
 			conn.close();
 
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 
 			JOptionPane.showMessageDialog(null, e);
 
@@ -99,28 +104,24 @@ public class TemaDAO {
 	}
 
 	/*
+	 * Obtener tema por codigo
+	 */
+	
+
+	/*
 	 * Eliminar Tema
 	 */
 	
-	public void eliminarTema(String codigo) {
-		try {
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
-
-			String query = "DELETE FROM tema where id_tema =" + codigo + "";
-			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
-
-
-			preparedStmt.execute();
-			
-			conn.close();
-
-		} catch (ClassNotFoundException | SQLException e) {
-			JOptionPane.showMessageDialog(null, e);
-		}
+	public void eliminarTema (String cod_tema){
+		
 	}
-
-
 	
+	/*
+	 * 					dao.eliminarTemaPorID(
+							dao.obtenerTemaPorID(table.getValueAt(table.getSelectedRow(), 0).toString()).getID());
+					cargarTabla(dao.obtenerTemas());
+	 */
+	
+
+
 }

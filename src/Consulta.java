@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -164,14 +166,15 @@ public class Consulta extends JSplitPane {
 			 @Override
 			    public void actionPerformed(ActionEvent arg0) {
 			        // check for selected row first
-			        if (table.getSelectedRow() != -1) {
-			            // remove selected row from the model
-			            model.removeRow(table.getSelectedRow());
-			        
-			            
-			        }
-			    }
-			 });
+				 int m = JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor(btnEliminar),
+							"¿Está seguro que quiere eliminar el tema " + table.getValueAt(table.getSelectedRow(), 0) + "?",
+							"Eliminar", JOptionPane.YES_NO_OPTION);
+					if (m == JOptionPane.YES_OPTION && table.getSelectedRow() != -1) {
+				            model.removeRow(table.getSelectedRow());
+				            //temaDAO.eliminarTemaPorCodigo(codigo);
+				            }
+				}
+			});
 		
 		panel.add(btnEliminar);
 
