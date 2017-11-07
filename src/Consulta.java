@@ -72,6 +72,7 @@ public class Consulta extends JSplitPane {
 
 		
 		
+<<<<<<< HEAD
 		//UsuarioDAO usuarioDAO = new UsuarioDAO();
 		model = new DefaultTableModel() {
 			@Override
@@ -79,6 +80,10 @@ public class Consulta extends JSplitPane {
 				return false;
 			}
 		};
+=======
+		Object[][] data = {{ "ABC123", "Libro", "12", "24" }, { "DEF456", "Cosas", "22", "24" }, { "GHI789", "Politica", "05", "17" }, 
+				};
+>>>>>>> 5f87d4858c21a8c45812e995bc41dc163bd5cb01
 
 		table = new JTable(model);
 		table.getTableHeader().setBackground(new Color(252, 252, 252));

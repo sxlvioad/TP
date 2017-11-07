@@ -56,7 +56,7 @@ public class TemaDAO {
 			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM Tema");
 			while (rs.next()) {
 				Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
-						rs.getDate("fecha_inicio").toLocalDate(), rs.getDate("fecha_fin").toLocalDate(), rs.getString("descripcion"));
+						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
 				listarTema.add(tema);
 			}
 			conn.close();
