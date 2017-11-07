@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,8 +12,17 @@ import javax.swing.table.DefaultTableModel;
 
 public class Consulta extends JSplitPane {
 
-	private JTextField textField;
-	@SuppressWarnings("unused")
+	private JTextField busquedaTxtFld;
+	private JButton imagebutton;
+	private JLabel lblConsultas;
+	
+	private JLabel lblFiltrar;
+	private JComboBox<String> filtrarCmbBox;
+	private JButton btnCrearTema;
+	private JButton btnCrearSeguimiento;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private static DefaultTableModel model;
 	private JTable table;
 
 	public Consulta(JFrame marco) {
@@ -28,25 +38,25 @@ public class Consulta extends JSplitPane {
 		barra.setBackground(new Color(69, 193, 100));
 		add(barra);
 
-		textField = new JTextField();
-		textField.setBounds(181, 28, 507, 29);
-		textField.setColumns(10);
-		textField.setBorder(null);
-		textField.setBackground(new Color(65, 182, 94));
-		textField.setFont(new Font("Calibri", Font.PLAIN, 14));
-		TextPrompt placeholder = new TextPrompt(" Buscar", textField);
+		busquedaTxtFld = new JTextField();
+		busquedaTxtFld.setBounds(181, 28, 507, 29);
+		busquedaTxtFld.setColumns(10);
+		busquedaTxtFld.setBorder(null);
+		busquedaTxtFld.setBackground(new Color(65, 182, 94));
+		busquedaTxtFld.setFont(new Font("Calibri", Font.PLAIN, 14));
+		TextPrompt placeholder = new TextPrompt(" Buscar", busquedaTxtFld);
 		placeholder.changeAlpha(0.75f);
 		placeholder.changeStyle(Font.ITALIC);
-		barra.add(textField);
+		barra.add(busquedaTxtFld);
 
-		JButton imagebutton = new JButton();
+		imagebutton = new JButton();
 		imagebutton.setIcon(new ImageIcon(this.getClass().getResource("/searcher1.png")));
 		imagebutton.setBounds(687, 28, 31, 29);
 		imagebutton.setBorder(new EmptyBorder(0, 0, 0, 0));
 		imagebutton.setBackground(new Color(65, 182, 94));
 		barra.add(imagebutton);
 
-		JLabel lblConsultas = new JLabel("Consultas");
+		lblConsultas = new JLabel("Consultas");
 		lblConsultas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConsultas.setBounds(20, 28, 117, 29);
 		lblConsultas.setFont(new Font("Calibri", Font.PLAIN, 20));
@@ -62,29 +72,40 @@ public class Consulta extends JSplitPane {
 
 		
 		
-		Object[][] data = {{ "ABC123", "Libro", "12", "24" }, { "DEF456", "Cosas", "22", "24" }, { "GHI789", "Politica", "05", "17" }, 
-				};
+		//UsuarioDAO usuarioDAO = new UsuarioDAO();
+		model = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
+		table = new JTable(model);
+		table.getTableHeader().setBackground(new Color(252, 252, 252));
 		
-		String[] columnNames = { "Codigo Tema", "Palabra Clave", "Inicio", "Fin" };
-		final DefaultTableModel model = new DefaultTableModel(data, columnNames);
+		model.addColumn("Codigo tema");
+		model.addColumn("Palabra clave");
+		model.addColumn("Inicio");
+		model.addColumn("Fin");
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(180, 10, 537, 382);
+		scrollPane.setViewportBorder(null);
+		scrollPane.getViewport().setBackground(new Color(252, 252, 252));;
 
-		final JTable table = new JTable(model);
-		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		table.setBounds(184, 17, 537, 382);
-		panel.add(table);
+		panel.add(scrollPane);
 	
 
-		JLabel lblFiltrar = new JLabel("Filtrar");
+		lblFiltrar = new JLabel("Filtrar");
 		lblFiltrar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblFiltrar.setBounds(20, 18, 46, 14);
 		panel.add(lblFiltrar);
 
-		JComboBox<Operador> comboBox = new JComboBox<Operador>();
-		comboBox.setBounds(20, 43, 144, 20);
-		panel.add(comboBox);
+		filtrarCmbBox = new JComboBox<String>();
+		filtrarCmbBox.setBounds(20, 43, 144, 20);
+		panel.add(filtrarCmbBox);
 
-		JButton btnCrearTema = new JButton("Añadir tema");
+		btnCrearTema = new JButton("Añadir tema");
 		btnCrearTema.setHorizontalAlignment(SwingConstants.LEFT);
 		btnCrearTema.setBounds(3, 77, 154, 33);
 		btnCrearTema.setIcon(new ImageIcon(this.getClass().getResource("/NuevoTema.png")));
@@ -102,7 +123,7 @@ public class Consulta extends JSplitPane {
 		});
 		panel.add(btnCrearTema);
 
-		JButton btnCrearSeguimiento = new JButton("Añadir seguimiento");
+		btnCrearSeguimiento = new JButton("Añadir seguimiento");
 		btnCrearSeguimiento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -123,7 +144,7 @@ public class Consulta extends JSplitPane {
 		});
 		panel.add(btnCrearSeguimiento);
 
-		JButton btnModificar = new JButton("Modificar");
+		btnModificar = new JButton("Modificar");
 		btnModificar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnModificar.setBounds(3, 170, 157, 33);
 		btnModificar.setIcon(new ImageIcon(this.getClass().getResource("/Modificar.png")));
@@ -132,7 +153,7 @@ public class Consulta extends JSplitPane {
 		btnModificar.setBorderPainted(false);
 		panel.add(btnModificar);
 
-		JButton btnEliminar = new JButton("Eliminar tema");
+		btnEliminar = new JButton("Eliminar tema");
 		btnEliminar.setHorizontalAlignment(SwingConstants.LEFT);
 		btnEliminar.setBounds(3, 214, 155, 33);
 		btnEliminar.setIcon(new ImageIcon(this.getClass().getResource("/Eliminar.png")));
@@ -155,4 +176,5 @@ public class Consulta extends JSplitPane {
 
 
 	}
+
 }

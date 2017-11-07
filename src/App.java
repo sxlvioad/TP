@@ -104,8 +104,8 @@ public class App extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				marco.setContentPane(new Modificar(marco));
-				marco.validate();
+				//marco.setContentPane(new Modificar(marco));
+				//marco.validate();
 			}
 		});
 

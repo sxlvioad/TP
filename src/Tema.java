@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-
 public class Tema {
 
 	private String codigo;
@@ -41,9 +40,8 @@ public class Tema {
 	}
 
 	public void setInicio(Date inicio) {
-		ZoneId defaultZoneId = ZoneId.systemDefault();
-		Instant instant = inicio.toInstant();
-		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+		LocalDate date = inicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		this.inicio = date;
 	}
 
 	public Date getFin() {
@@ -51,9 +49,7 @@ public class Tema {
 	}
 
 	public void setFin(Date fin) {
-		ZoneId defaultZoneId = ZoneId.systemDefault();
-		Instant instant = fin.toInstant();
-		LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+		this.fin = fin;
 	}
 
 	public String getDescripcion() {

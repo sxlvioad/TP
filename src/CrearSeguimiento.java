@@ -10,8 +10,10 @@ public class CrearSeguimiento extends JPanel {
 	private JTextField hscentraltxtField;
 	private JTextField notasDiariostxtField;
 	private JTextField tapasRevistatxtField;
-	private UsuarioDAO usuarioDAO = new UsuarioDAO();
-
+	private TemaDAO temaDAO = new TemaDAO();
+	private SeguimientoDAO seguimientoDAO = new SeguimientoDAO();
+	private OperadorDAO operadorDAO = new OperadorDAO();
+	
 	public CrearSeguimiento(JFrame marco){
 		
 		setLayout(null);
@@ -36,7 +38,7 @@ public class CrearSeguimiento extends JPanel {
 		barra.add(lblTema);
 		
 		JComboBox<String> temacmbBox = new JComboBox<String>();
-		for (String tema : usuarioDAO.listarTemas()) {
+		for (String tema : temaDAO.showTemas()) {
 			temacmbBox.addItem(tema);
 		}
 		temacmbBox.setBounds(102, 53, 319, 20);
@@ -49,7 +51,7 @@ public class CrearSeguimiento extends JPanel {
 		
 		JComboBox<String> operadorcmbBox = new JComboBox<String>();
 		//usuarioDAO.listarOperadores();
-		for (String operadores : usuarioDAO.listarOperadores()) {
+		for (String operadores : operadorDAO.listarOperadores()) {
 			operadorcmbBox.addItem(operadores);
 		}
 		operadorcmbBox.setBounds(541, 53, 160, 20);
@@ -137,7 +139,7 @@ public class CrearSeguimiento extends JPanel {
 		btnAceptar.addActionListener(event -> {
 			
 			Seguimiento seguimiento = new Seguimiento((String)temacmbBox.getSelectedItem(),(String)operadorcmbBox.getSelectedItem(), Integer.parseInt(televisiontxtField.getText()), Integer.parseInt(hscentraltxtField.getText()), Integer.parseInt(tapasRevistatxtField.getText()), Integer.parseInt(notasDiariostxtField.getText()), (String)apreciaciontxtArea.getText());
-			usuarioDAO.agregarSeguimiento(seguimiento);
+			seguimientoDAO.agregarSeguimiento(seguimiento);
 			marco.setContentPane(new Consulta(marco));
 			marco.validate(); 
 			

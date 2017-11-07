@@ -4,11 +4,25 @@ import com.toedter.calendar.JDateChooser;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
 @SuppressWarnings("serial")
 
 public class Crear extends JPanel {
+	
+	private JTextField palabraClavetxtFld;
+	private JTextField codigotxtFld;
+	private JDateChooser fechaInicio;
+	private JDateChooser fechaFin;
+	private JTextArea descripciontxtArea;
+	private JButton btnCancelar;
+	private JButton btnAceptar;
+	
+	private TemaDAO temaDAO = new TemaDAO();
+	
 	
 	public Crear(JFrame marco) {
 
@@ -39,7 +53,7 @@ public class Crear extends JPanel {
 		lblPalabraClave.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblPalabraClave);
 
-		JTextField palabraClavetxtFld = new JTextField();
+		palabraClavetxtFld = new JTextField();
 		palabraClavetxtFld.setBounds(153, 26, 388, 20);
 		palabraClavetxtFld.setColumns(10);
 		panel.add(palabraClavetxtFld);
@@ -49,10 +63,10 @@ public class Crear extends JPanel {
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblCodigo);
 
-		JTextField codigotxtF = new JTextField("");
-		codigotxtF.setBounds(621, 25, 64, 20);
+		codigotxtFld = new JTextField("");
+		codigotxtFld.setBounds(621, 25, 64, 20);
 		lblCodigo.setFont(new Font("Calibri", Font.PLAIN, 18));
-		panel.add(codigotxtF);
+		panel.add(codigotxtFld);
 
 		JLabel lblSeguimiento = new JLabel("Seguimiento");
 		lblSeguimiento.setBounds(39, 61, 127, 20);
@@ -64,7 +78,7 @@ public class Crear extends JPanel {
 		lblDesde.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel.add(lblDesde);
 
-		JDateChooser fechaInicio = new JDateChooser();
+		fechaInicio = new JDateChooser();
 		fechaInicio.setBounds(477, 89, 171, 20);
 		panel.add(fechaInicio);
 
@@ -73,7 +87,7 @@ public class Crear extends JPanel {
 		lblHasta.setFont(new Font("Calibri", Font.PLAIN, 16));
 		panel.add(lblHasta);
 
-		JDateChooser fechaFin = new JDateChooser();
+		fechaFin = new JDateChooser();
 		fechaFin.setBounds(213, 89, 172, 20);
 		panel.add(fechaFin);
 
@@ -82,12 +96,12 @@ public class Crear extends JPanel {
 		lblDescipcin.setFont(new Font("Calibri", Font.PLAIN, 18));
 		panel.add(lblDescipcin);
 
-		JTextArea descripciontxtArea = new JTextArea();
+		descripciontxtArea = new JTextArea();
 		JScrollPane scrollpane = new JScrollPane(descripciontxtArea);
 		scrollpane.setBounds(158, 138, 553, 206);
 		panel.add(scrollpane);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(617, 355, 94, 23);
 		btnCancelar.addActionListener(event -> {
 			marco.setContentPane(new Consulta(marco));
@@ -95,13 +109,12 @@ public class Crear extends JPanel {
 		});
 		panel.add(btnCancelar);
 
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		btnAceptar.setBounds(513, 355, 94, 23);
 		btnAceptar.addActionListener(event -> {
-
-			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			Tema tema = new Tema(codigotxtF.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
-			usuarioDAO.agregarTema(tema);
+			
+			Tema tema = new Tema(codigotxtFld.getText(), palabraClavetxtFld.getText(), fechaInicio.getDate(), fechaFin.getDate(), descripciontxtArea.getText());
+			temaDAO.agregarTema(tema);
 			
 			marco.setContentPane(new Consulta(marco));
 			marco.validate();
