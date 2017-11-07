@@ -104,7 +104,20 @@ public class Consulta extends JSplitPane {
 		panel.add(lblFiltrar);
 
 		filtrarCmbBox = new JComboBox<String>();
+		for (String filtro : temaDAO.showPalabrasClave()) {
+			
+			filtrarCmbBox.addItem(filtro);
+			
+		}
 		filtrarCmbBox.setBounds(20, 43, 144, 20);
+		filtrarCmbBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			
+			}
+		});
 		panel.add(filtrarCmbBox);
 
 		btnCrearTema = new JButton("Añadir tema");
@@ -172,6 +185,7 @@ public class Consulta extends JSplitPane {
 					if (m == JOptionPane.YES_OPTION && table.getSelectedRow() != -1) {
 				            model.removeRow(table.getSelectedRow());
 				            //temaDAO.eliminarTemaPorCodigo(codigo);
+				            //table.getValueAt(table.getSelectedRow(), 0).toString()).getCodigo()
 				            }
 				}
 			});

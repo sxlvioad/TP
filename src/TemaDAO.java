@@ -46,7 +46,7 @@ public class TemaDAO {
 
 			preparedStmt.execute();
 
-			conn.close();
+			
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e);
 		}
@@ -68,7 +68,7 @@ public class TemaDAO {
 						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
 				listarTema.add(tema);
 			}
-			conn.close();
+			
 
 		} catch (SQLException e) {
 
@@ -93,8 +93,7 @@ public class TemaDAO {
 				String tema = rs.getString("cod_tema");
 				listarTema.add(tema);
 			}
-			conn.close();
-
+			
 		} catch (SQLException e) {
 
 			JOptionPane.showMessageDialog(null, e);
@@ -103,6 +102,30 @@ public class TemaDAO {
 		return listarTema;
 	}
 
+	
+	/*
+	 * Mostrar palabras clave
+	 */
+	
+	public ArrayList<String> showPalabrasClave() {
+		ArrayList<String> listarPalabrasClave = new ArrayList<>();
+		try {
+
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT palabra_clave from tema");
+			while (rs.next()) {
+				String tema = rs.getString("palabra_clave");
+				listarPalabrasClave.add(tema);
+			}
+
+		} catch (SQLException e) {
+
+			JOptionPane.showMessageDialog(null, e);
+
+		}
+		return listarPalabrasClave;
+	}
+	
 	/*
 	 * Obtener tema por codigo
 	 */
@@ -112,10 +135,11 @@ public class TemaDAO {
 	 * Eliminar Tema
 	 */
 	
-	public void eliminarTema (String cod_tema){
+	public void obtenerTemaPorCodigo (String cod_tema){
 		
 	}
-	
+
+
 	/*
 	 * 					dao.eliminarTemaPorID(
 							dao.obtenerTemaPorID(table.getValueAt(table.getSelectedRow(), 0).toString()).getID());
