@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -45,9 +47,23 @@ public class Consulta extends JSplitPane {
 		busquedaTxtFld.setBorder(null);
 		busquedaTxtFld.setBackground(new Color(65, 182, 94));
 		busquedaTxtFld.setFont(new Font("Calibri", Font.PLAIN, 14));
-		TextPrompt placeholder = new TextPrompt(" Buscar", busquedaTxtFld);
+		TextPrompt placeholder = new TextPrompt(" Buscar por palabra clave", busquedaTxtFld);
 		placeholder.changeAlpha(0.75f);
 		placeholder.changeStyle(Font.ITALIC);
+		busquedaTxtFld.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				ArrayList<Tema> resultado = new ArrayList<Tema>();
+				if (busquedaTxtFld.getText() == ""){
+					agregarTemas(temaDAO.obtenerTemas());
+				}
+				else {
+					resultado.addAll(temaDAO.buscarTema(busquedaTxtFld.getText()));
+					agregarTemas(resultado);
+				}
+			}
+		});
+		
 		barra.add(busquedaTxtFld);
 
 		imagebutton = new JButton();
@@ -55,6 +71,17 @@ public class Consulta extends JSplitPane {
 		imagebutton.setBounds(687, 28, 31, 29);
 		imagebutton.setBorder(new EmptyBorder(0, 0, 0, 0));
 		imagebutton.setBackground(new Color(65, 182, 94));
+		imagebutton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+					ArrayList<Tema> resultado = new ArrayList<Tema>();
+					resultado.addAll(temaDAO.buscarTema(busquedaTxtFld.getText()));
+					agregarTemas(resultado);
+
+			}
+		});
 		barra.add(imagebutton);
 
 		lblConsultas = new JLabel("Consultas");
@@ -94,26 +121,31 @@ public class Consulta extends JSplitPane {
 		scrollPane.getViewport().setBackground(new Color(252, 252, 252));;
 
 		panel.add(scrollPane);
-	
-
+		
 		lblFiltrar = new JLabel("Filtrar");
 		lblFiltrar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblFiltrar.setBounds(20, 18, 46, 14);
 		panel.add(lblFiltrar);
 
 		filtrarCmbBox = new JComboBox<String>();
+		filtrarCmbBox.addItem("");
 		for (String filtro : temaDAO.listarTemas()) {
-			
 			filtrarCmbBox.addItem(filtro);
-			
 		}
 		filtrarCmbBox.setBounds(20, 43, 144, 20);
 		filtrarCmbBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 			
+				ArrayList<Tema> resultado = new ArrayList<Tema>();
+				if (filtrarCmbBox.getSelectedItem().toString() == ""){
+					agregarTemas(temaDAO.obtenerTemas());
+				}
+				else {
+					resultado.addAll(temaDAO.buscarTema(filtrarCmbBox.getSelectedItem().toString()));
+					agregarTemas(resultado);
+				}
 			}
 		});
 		panel.add(filtrarCmbBox);
@@ -177,26 +209,27 @@ public class Consulta extends JSplitPane {
 			 @Override
 			    public void actionPerformed(ActionEvent arg0) {
 			        // check for selected row first
+				 try {
 				 int m = JOptionPane.showConfirmDialog(SwingUtilities.getWindowAncestor(btnEliminar),
-							"¿Está seguro que quiere eliminar el tema " + table.getValueAt(table.getSelectedRow(), 0) + "?",
+							"¿Desea eliminar el tema " + table.getValueAt(table.getSelectedRow(), 0) + "?",
 							"Eliminar", JOptionPane.YES_NO_OPTION);
 					if (m == JOptionPane.YES_OPTION && table.getSelectedRow() != -1) {
 				            //model.removeRow(table.getSelectedRow());
-				            temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString());
-				            temaDAO.eliminarTemaPorCodigo(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString());
+				            // temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0.toString());
+				            temaDAO.eliminarTemaPorCodigo(table.getValueAt(table.getSelectedRow(), 0).toString());
 				            agregarTemas(temaDAO.obtenerTemas());
 				            }
+				 } catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "No seleccionó ningun tema.");
+				 }
 				}
 			});
 		
 		panel.add(btnEliminar);
-
-
-
 	}
 
 	public static void agregarTemas(ArrayList<Tema> temas) {
-		// TODO Auto-generated method stub
+		
 		model.setRowCount(0);
 		for (int i = 0; i < temas.size(); i++) {
 			Object[] v = { temas.get(i).getCodigo(), temas.get(i).getPalabraClave(),

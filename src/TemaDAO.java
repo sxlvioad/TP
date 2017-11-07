@@ -86,9 +86,9 @@ public class TemaDAO {
 		ArrayList<String> temas = new ArrayList<String>();
 		try{
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT cod_tema FROM tema");
+			rs = stmt.executeQuery("SELECT palabra_clave FROM tema");
 			while (rs.next()) {
-				String codigo = (rs.getString("cod_tema"));
+				String codigo = (rs.getString("palabra_clave"));
 				temas.add(codigo);
 			}
 		} catch (SQLException e) {
