@@ -24,6 +24,7 @@ public class Consulta extends JSplitPane {
 	private JButton btnEliminar;
 	private static DefaultTableModel model;
 	private JTable table;
+	private TemaDAO temaDAO = new TemaDAO();
 
 	public Consulta(JFrame marco) {
 
@@ -70,10 +71,6 @@ public class Consulta extends JSplitPane {
 		panel.setLayout(null);
 		add(panel);
 
-		
-		
-
-
 		model = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -88,6 +85,8 @@ public class Consulta extends JSplitPane {
 		model.addColumn("Palabra clave");
 		model.addColumn("Inicio");
 		model.addColumn("Fin");
+		
+		agregarTemas(temaDAO.displayTemas());
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(180, 10, 537, 382);
@@ -168,6 +167,8 @@ public class Consulta extends JSplitPane {
 			        if (table.getSelectedRow() != -1) {
 			            // remove selected row from the model
 			            model.removeRow(table.getSelectedRow());
+			        
+			            
 			        }
 			    }
 			 });
@@ -176,6 +177,18 @@ public class Consulta extends JSplitPane {
 
 
 
+	}
+
+	public static void agregarTemas(ArrayList<Tema> temas) {
+		// TODO Auto-generated method stub
+		model.setRowCount(0);
+		for (int i = 0; i < temas.size(); i++) {
+			Object[] v = { temas.get(i).getCodigo(), temas.get(i).getPalabraClave(),
+					temas.get(i).getInicio(), temas.get(i).getFin()
+					 };
+			model.addRow(v);
+	
+		}
 	}
 
 }

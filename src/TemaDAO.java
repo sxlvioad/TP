@@ -102,19 +102,18 @@ public class TemaDAO {
 	 * Eliminar Tema
 	 */
 	
-	public void eliminarTema(Tema tema) {
+	public void eliminarTema(String codigo) {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = (Connection) DriverManager.getConnection(url, "root", "admin");
 
-			String query = "DELETE FROM tema where id_tema = ?";
+			String query = "DELETE FROM tema where id_tema =" + codigo + "";
 			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
-			preparedStmt.setInt(1, 3); // como hago para seleccionar el id_tema
-										// desde mi JTable ¿¿¿¿
+
 
 			preparedStmt.execute();
-
+			
 			conn.close();
 
 		} catch (ClassNotFoundException | SQLException e) {
