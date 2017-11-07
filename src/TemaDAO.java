@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
-import com.mysql.jdbc.StatementImpl;
 
 public class TemaDAO {
 
@@ -27,7 +26,7 @@ public class TemaDAO {
 	}
 	
 	/*
-	 * nuevo tema
+	 *  AGREGAR TEMA
 	 */
 	
 	public void agregarTema(Tema tema) {
@@ -53,20 +52,20 @@ public class TemaDAO {
 	}
 
 	/*
-	 * Consulta Temas
+	 *  OBTENER TEMAS
 	 */
 
-	public ArrayList<Tema> displayTemas() {
+	public ArrayList<Tema> obtenerTemas() {
 
-		ArrayList<Tema> listarTema = new ArrayList<>();
+		ArrayList<Tema> temas = new ArrayList<>();
 		try {
 
 			ResultSet rs;
-			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM Tema");
+			rs = stmt.executeQuery("SELECT cod_tema, palabra_clave, fecha_inicio, fecha_fin, descripcion FROM tema");
 			while (rs.next()) {
 				Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
 						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
-				listarTema.add(tema);
+				temas.add(tema);
 			}
 			
 
@@ -75,73 +74,100 @@ public class TemaDAO {
 			JOptionPane.showMessageDialog(null, e);
 
 		}
-		return listarTema;
-
+		return temas;
 	}
 	
 	/*
-	 * Mostrar cod_tema
+	 * LISTAR TEMAS
 	 */
 	
-	public ArrayList<String> showTemas() {
-		ArrayList<String> listarTema = new ArrayList<>();
-		try {
-
-			ResultSet rs;
-			rs = stmt.executeQuery("SELECT cod_tema from tema");
-			while (rs.next()) {
-				String tema = rs.getString("cod_tema");
-				listarTema.add(tema);
-			}
-			
-		} catch (SQLException e) {
-
-			JOptionPane.showMessageDialog(null, e);
-
-		}
-		return listarTema;
-	}
-
-	
-	/*
-	 * Mostrar palabras clave
-	 */
-	
-	public ArrayList<String> showPalabrasClave() {
-		ArrayList<String> listarPalabrasClave = new ArrayList<>();
-		try {
-
-			ResultSet rs;
-			rs = stmt.executeQuery("SELECT palabra_clave from tema");
-			while (rs.next()) {
-				String tema = rs.getString("palabra_clave");
-				listarPalabrasClave.add(tema);
-			}
-
-		} catch (SQLException e) {
-
-			JOptionPane.showMessageDialog(null, e);
-
-		}
-		return listarPalabrasClave;
-	}
-	
-	/*
-	 * Obtener tema por codigo
-	 */
-	
-
-	/*
-	 * Eliminar Tema
-	 */
-	
-	public void obtenerTemaPorCodigo (String cod_tema){
+	public ArrayList<String> listarTemas() {
 		
+		ArrayList<String> temas = new ArrayList<String>();
+		try{
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT cod_tema FROM tema");
+			while (rs.next()) {
+				String codigo = (rs.getString("cod_tema"));
+				temas.add(codigo);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		return temas;
+	}
+	
+	/*
+	 * BUSCAR TEMA POR PALABRA CLAVE
+	 */
+	
+	public ArrayList<Tema> buscarTema(String texto) {
+		
+		ArrayList<Tema> temas = new ArrayList<Tema>();
+		try {
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT * FROM tema WHERE palabra_clave like'"
+							+ texto + "%'");
+			while (rs.next()) {
+				Tema tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
+						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
+				temas.add(tema);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		return temas;
+	}
+	
+	/*
+	 * OBTENER TEMA POR CODIGO
+	 */
+	
+	public Tema obtenerTemaPorCodigo(String codigo) {
+		
+		Tema tema = null;
+		try {
+			ResultSet rs;
+			rs = stmt.executeQuery("SELECT * FROM tema WHERE cod_tema like ' "
+							+ codigo + "%' ");
+			while (rs.next()) {
+				tema = new Tema(rs.getString("cod_tema"), rs.getString("palabra_clave"),
+						rs.getDate("fecha_inicio"), rs.getDate("fecha_fin"), rs.getString("descripcion"));
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		return tema;
+	}
+	
+	
+	/*
+	 * ELIMINAR TEMA POR CODIGO
+	 */
+	
+	public void eliminarTemaPorCodigo(String codigo){
+	
+		try {
+			PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement("DELETE FROM tema WHERE cod_tema = '" + codigo + "'");
+			preparedStmt.execute();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e);
+		}	
 	}
 
 
 	/*
-	 * 					dao.eliminarTemaPorID(
+	 * UPDATE TEMA
+	 */
+
+	
+	
+	
+	
+	
+
+	/*
+	  					dao.eliminarTemaPorID(
 							dao.obtenerTemaPorID(table.getValueAt(table.getSelectedRow(), 0).toString()).getID());
 					cargarTabla(dao.obtenerTemas());
 	 */

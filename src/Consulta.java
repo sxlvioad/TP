@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -88,7 +86,7 @@ public class Consulta extends JSplitPane {
 		model.addColumn("Inicio");
 		model.addColumn("Fin");
 		
-		agregarTemas(temaDAO.displayTemas());
+		agregarTemas(temaDAO.obtenerTemas());
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(180, 10, 537, 382);
@@ -104,7 +102,7 @@ public class Consulta extends JSplitPane {
 		panel.add(lblFiltrar);
 
 		filtrarCmbBox = new JComboBox<String>();
-		for (String filtro : temaDAO.showPalabrasClave()) {
+		for (String filtro : temaDAO.listarTemas()) {
 			
 			filtrarCmbBox.addItem(filtro);
 			
@@ -183,9 +181,10 @@ public class Consulta extends JSplitPane {
 							"¿Está seguro que quiere eliminar el tema " + table.getValueAt(table.getSelectedRow(), 0) + "?",
 							"Eliminar", JOptionPane.YES_NO_OPTION);
 					if (m == JOptionPane.YES_OPTION && table.getSelectedRow() != -1) {
-				            model.removeRow(table.getSelectedRow());
-				            //temaDAO.eliminarTemaPorCodigo(codigo);
-				            //table.getValueAt(table.getSelectedRow(), 0).toString()).getCodigo()
+				            //model.removeRow(table.getSelectedRow());
+				            temaDAO.obtenerTemaPorCodigo(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString());
+				            temaDAO.eliminarTemaPorCodigo(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()).toString());
+				            agregarTemas(temaDAO.obtenerTemas());
 				            }
 				}
 			});

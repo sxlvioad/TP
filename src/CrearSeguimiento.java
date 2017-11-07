@@ -38,7 +38,7 @@ public class CrearSeguimiento extends JPanel {
 		barra.add(lblTema);
 		
 		JComboBox<String> temacmbBox = new JComboBox<String>();
-		for (String tema: temaDAO.showTemas()) {
+		for (String tema: temaDAO.listarTemas()) {
 
 			temacmbBox.addItem(tema);
 		}
